@@ -4,14 +4,13 @@ from stable_baselines3 import DQN
 from stable_baselines3 import PPO
 
 # import roundabout_env  # noqa: F401
-from highway_env.envs.roundabout_env import RoundaboutEnv
-
+from highway_env.envs.aa228_env import AA228Env
 
 TRAIN = True
 
 if __name__ == "__main__":
     # Create the environment
-    env = gym.make("roundabout-v0", render_mode="rgb_array",
+    env = gym.make("aa228-v0", render_mode="rgb_array",
                 #    config={
                 #        "action" : {
                 #             # "type": "ContinuousAction",
@@ -22,7 +21,7 @@ if __name__ == "__main__":
     obs, info = env.reset()
 
     # Create the model
-    model_str = "dqn"
+    model_str = "ppo"
 
     if model_str == "dqn":
         model = DQN(
@@ -58,7 +57,7 @@ if __name__ == "__main__":
 
     # Train the model
     if TRAIN:
-        model.learn(total_timesteps=int(5e3))
+        model.learn(total_timesteps=int(1e2))
         # model.learn(total_timesteps=int(2e4))
         model.save("roundabout_" + model_str + "/model")
         del model
@@ -72,7 +71,7 @@ if __name__ == "__main__":
         env, video_folder="roundabout_" + model_str + "/videos", episode_trigger=lambda e: True
     )
     env.unwrapped.config["simulation_frequency"] = 15  # Higher FPS for rendering
-    env.unwrapped.set_record_video_wrapper(env)
+    # env.unwrapped.set_record_video_wrapper(env)
 
     for videos in range(3):
         done = truncated = False
@@ -84,4 +83,4 @@ if __name__ == "__main__":
             obs, reward, done, truncated, info = env.step(action)
             # Render
             env.render()
-    env.close()
+    # env.close()

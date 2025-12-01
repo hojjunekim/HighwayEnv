@@ -112,6 +112,12 @@ def _register_highway_envs():
         entry_point="highway_env.envs.roundabout_env:RoundaboutEnv",
     )
 
+    # aa228_env.py
+    register(
+        id="aa228-v0",
+        entry_point="highway_env.envs.aa228_env:AA228Env",
+    )
+
     # two_way_env.py
     register(
         id="two-way-v0",

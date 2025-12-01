@@ -9,7 +9,7 @@ from highway_env.road.road import Road, RoadNetwork
 from highway_env.vehicle.controller import MDPVehicle
 
 
-class RoundaboutEnv(AbstractEnv):
+class AA228Env(AbstractEnv):
     @classmethod
     def default_config(cls) -> dict:
         config = super().default_config()
@@ -18,6 +18,7 @@ class RoundaboutEnv(AbstractEnv):
                 "observation": {
                     "type": "Kinematics",
                     "absolute": True,
+                    "vehicles_count": 10,
                     "features_range": {
                         "x": [-100, 100],
                         "y": [-100, 100],
@@ -25,12 +26,14 @@ class RoundaboutEnv(AbstractEnv):
                         "vy": [-15, 15],
                     },
                 },
-                "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
+                # "action": {"type": "ContinuousAction"}, # not for DQN
+                # "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
+                "action": {"type": "DiscreteMetaAction"},
                 "incoming_vehicle_destination": None,
-                "collision_reward": -1,
+                "collision_reward": -100000,
                 "high_speed_reward": 0.2,
                 "right_lane_reward": 0,
-                "lane_change_reward": -0.05,
+                # "lane_change_reward": -0.05,
                 "screen_width": 600,
                 "screen_height": 600,
                 "centering_position": [0.5, 0.6],
@@ -59,7 +62,7 @@ class RoundaboutEnv(AbstractEnv):
             "collision_reward": self.vehicle.crashed,
             "high_speed_reward": MDPVehicle.get_speed_index(self.vehicle)
             / (MDPVehicle.DEFAULT_TARGET_SPEEDS.size - 1),
-            "lane_change_reward": action in [0, 2],
+            # "lane_change_reward": action in [0, 2],
             "on_road_reward": self.vehicle.on_road,
         }
 
@@ -76,14 +79,15 @@ class RoundaboutEnv(AbstractEnv):
     def _make_road(self) -> None:
         # Circle lanes: (s)outh/(e)ast/(n)orth/(w)est (e)ntry/e(x)it.
         center = [0, 0]  # [m]
-        radius = 20  # [m]
+        radius = 24  # [m]
         alpha = 24  # [deg]
 
         net = RoadNetwork()
         radii = [radius, radius + 4]
         n, c, s = LineType.NONE, LineType.CONTINUOUS, LineType.STRIPED
-        line = [[c, s], [n, c]]
-        for lane in [0, 1]:
+        line = [[c, c], [c, c]]
+        # line = [[c, s], [n, c]]
+        for lane in [0]:
             net.add_lane(
                 "se",
                 "ex",
@@ -347,9 +351,10 @@ class RoundaboutEnv(AbstractEnv):
         # Incoming vehicle
         destinations = ["exr", "sxr", "nxr"]
         other_vehicles_type = utils.class_from_path(self.config["other_vehicles_type"])
+        
         vehicle = other_vehicles_type.make_on_lane(
             self.road,
-            ("we", "sx", 1),
+            ("we", "sx", 0),
             longitudinal=5.0 + self.np_random.normal() * position_deviation,
             speed=16 + self.np_random.normal() * speed_deviation,
         )
@@ -360,10 +365,11 @@ class RoundaboutEnv(AbstractEnv):
             destination = self.np_random.choice(destinations)
         vehicle.plan_route_to(destination)
         vehicle.randomize_behavior()
-        self.road.vehicles.append(vehicle)
+        # self.road.vehicles.append(vehicle)
 
-        # Other vehicles
-        for i in list(range(1, 2)) + list(range(-1, 0)):
+        # Other vehicles in roundabout
+        # for i in list(range(1, 2)) + list(range(-1, 0)):
+        for i in list(range(10)):
             vehicle = other_vehicles_type.make_on_lane(
                 self.road,
                 ("we", "sx", 0),
@@ -376,12 +382,13 @@ class RoundaboutEnv(AbstractEnv):
             self.road.vehicles.append(vehicle)
 
         # Entering vehicle
-        vehicle = other_vehicles_type.make_on_lane(
-            self.road,
-            ("eer", "ees", 0),
-            longitudinal=50.0 + self.np_random.normal() * position_deviation,
-            speed=16.0 + self.np_random.normal() * speed_deviation,
-        )
-        vehicle.plan_route_to(self.np_random.choice(destinations))
-        vehicle.randomize_behavior()
-        self.road.vehicles.append(vehicle)
+        for i in list(range(0)):
+            vehicle = other_vehicles_type.make_on_lane(
+                self.road,
+                ("eer", "ees", 0),
+                longitudinal= 20.0 * float(i) + self.np_random.normal() * position_deviation,
+                speed=16.0 + self.np_random.normal() * speed_deviation,
+            )
+            vehicle.plan_route_to(self.np_random.choice(destinations))
+            vehicle.randomize_behavior()
+            self.road.vehicles.append(vehicle)

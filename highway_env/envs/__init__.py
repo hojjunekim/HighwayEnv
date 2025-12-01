@@ -14,6 +14,7 @@ from highway_env.envs.parking_env import (
 )
 from highway_env.envs.racetrack_env import RacetrackEnv
 from highway_env.envs.roundabout_env import RoundaboutEnv
+from highway_env.envs.aa228_env import AA228Env
 from highway_env.envs.two_way_env import TwoWayEnv
 from highway_env.envs.u_turn_env import UTurnEnv
 
@@ -32,6 +33,7 @@ __all__ = [
     "ParkingEnvParkedVehicles",
     "RacetrackEnv",
     "RoundaboutEnv",
+    "AA228Env",
     "TwoWayEnv",
     "UTurnEnv",
 ]

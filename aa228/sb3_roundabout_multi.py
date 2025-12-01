@@ -4,14 +4,14 @@ from stable_baselines3 import DQN
 from stable_baselines3 import PPO
 
 # import roundabout_env  # noqa: F401
-from highway_env.envs.roundabout_env import RoundaboutEnv
+from highway_env.envs.aa228_env import AA228Env
 
 
 TRAIN = True
 
 if __name__ == "__main__":
     # Create the environment
-    env = gym.make("roundabout-v0", render_mode="rgb_array",
+    env = gym.make("aa228-v0", render_mode="rgb_array",
                    config={
                        "controlled_vehicles": 2,
                        "vehicles_count" : 1,
