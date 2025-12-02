@@ -1,0 +1,90 @@
+diff --git a/aa228/sb3_roundabout.py b/aa228/sb3_roundabout.py
+index 1130365..2c39571 100644
+--- a/aa228/sb3_roundabout.py
++++ b/aa228/sb3_roundabout.py
+@@ -2,6 +2,9 @@ import gymnasium as gym
+ from gymnasium.wrappers import RecordVideo
+ from stable_baselines3 import DQN
+ from stable_baselines3 import PPO
++# from stable_baselines3.common.callbacks import WandbCallback # <-- New Import
++from wandb.integration.sb3 import WandbCallback
++import wandb # <-- New Import
+ 
+ # import roundabout_env  # noqa: F401
+ from highway_env.envs.aa228_env import AA228Env
+@@ -21,7 +24,7 @@ if __name__ == "__main__":
+     obs, info = env.reset()
+ 
+     # Create the model
+-    model_str = "ppo"
++    model_str = "dqn"
+ 
+     if model_str == "dqn":
+         model = DQN(
+@@ -57,9 +60,30 @@ if __name__ == "__main__":
+ 
+     # Train the model
+     if TRAIN:
+-        model.learn(total_timesteps=int(1e2))
+-        # model.learn(total_timesteps=int(2e4))
++        # Initialize wandb run
++        run = wandb.init(
++            project="aa228-highway-env",  # Replace with your desired project name
++            sync_tensorboard=True,        # Sync SB3's TensorBoard logs
++            monitor_gym=True,             # Monitor gym/gymnasium environments
++            save_code=True                # Save the script file
++        )
++
++        # Define the WandbCallback
++        wandb_callback = WandbCallback(
++            model_save_path="roundabout_" + model_str + "/wandb_models", # Folder to save models to
++            verbose=2,
++        )
++
++        # Pass the callback to model.learn()
++        model.learn(total_timesteps=int(2e2), callback=wandb_callback)
++        # model.learn(total_timesteps=int(2e4), callback=wandb_callback)
++        
++        # Save the final model outside of the callback
+         model.save("roundabout_" + model_str + "/model")
++        
++        # Finish the wandb run
++        run.finish()
++        
+         del model
+ 
+     # Run the trained model and record video
+@@ -73,7 +97,7 @@ if __name__ == "__main__":
+     env.unwrapped.config["simulation_frequency"] = 15  # Higher FPS for rendering
+     # env.unwrapped.set_record_video_wrapper(env)
+ 
+-    for videos in range(3):
++    for videos in range(10):
+         done = truncated = False
+         obs, info = env.reset()
+         while not (done or truncated):
+@@ -83,4 +107,4 @@ if __name__ == "__main__":
+             obs, reward, done, truncated, info = env.step(action)
+             # Render
+             env.render()
+-    # env.close()
++    # env.close()
+\ No newline at end of file
+diff --git a/highway_env/envs/aa228_env.py b/highway_env/envs/aa228_env.py
+index 2f600ca..b369648 100644
+--- a/highway_env/envs/aa228_env.py
++++ b/highway_env/envs/aa228_env.py
+@@ -28,10 +28,10 @@ class AA228Env(AbstractEnv):
+                 },
+                 # "action": {"type": "ContinuousAction"}, # not for DQN
+                 # "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
+-                "action": {"type": "DiscreteMetaAction"},
++                "action": {"type": "DiscreteMetaAction", "target_speeds": [100,200]},
+                 "incoming_vehicle_destination": None,
+-                "collision_reward": -100000,
+-                "high_speed_reward": 0.2,
++                "collision_reward": -1,
++                "high_speed_reward": 0.1,
+                 "right_lane_reward": 0,
+                 # "lane_change_reward": -0.05,
+                 "screen_width": 600,

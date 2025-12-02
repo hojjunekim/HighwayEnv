@@ -25,16 +25,16 @@ class RoundaboutEnv(AbstractEnv):
                         "vy": [-15, 15],
                     },
                 },
-                "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
+                "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 2, 4, 6, 8, 10]},
                 "incoming_vehicle_destination": None,
                 "collision_reward": -1,
-                "high_speed_reward": 0.2,
+                "high_speed_reward": 1.0,
                 "right_lane_reward": 0,
                 "lane_change_reward": -0.05,
                 "screen_width": 600,
                 "screen_height": 600,
                 "centering_position": [0.5, 0.6],
-                "duration": 11,
+                "duration": 20,
                 "normalize_reward": True,
             }
         )
@@ -360,16 +360,16 @@ class RoundaboutEnv(AbstractEnv):
             destination = self.np_random.choice(destinations)
         vehicle.plan_route_to(destination)
         vehicle.randomize_behavior()
-        self.road.vehicles.append(vehicle)
+        # self.road.vehicles.append(vehicle)
 
         # Other vehicles
-        for i in list(range(1, 2)) + list(range(-1, 0)):
+        for i in list(range(10)):
             vehicle = other_vehicles_type.make_on_lane(
                 self.road,
                 ("we", "sx", 0),
                 longitudinal=20.0 * float(i)
                 + self.np_random.normal() * position_deviation,
-                speed=16.0 + self.np_random.normal() * speed_deviation,
+                speed=8.0 + self.np_random.normal() * speed_deviation,
             )
             vehicle.plan_route_to(self.np_random.choice(destinations))
             vehicle.randomize_behavior()
@@ -384,4 +384,4 @@ class RoundaboutEnv(AbstractEnv):
         )
         vehicle.plan_route_to(self.np_random.choice(destinations))
         vehicle.randomize_behavior()
-        self.road.vehicles.append(vehicle)
+        # self.road.vehicles.append(vehicle)

@@ -16,28 +16,42 @@ class AA228Env(AbstractEnv):
         config.update(
             {
                 "observation": {
+                    # "type": "OccupancyGrid",
+                    # "vehicles_count": 15,
+                    # "features": ["presence", "x", "y", "vx", "vy", "cos_h", "sin_h"],
+                    # "features_range": {
+                    #     "x": [-100, 100],
+                    #     "y": [-100, 100],
+                    #     "vx": [-20, 20],
+                    #     "vy": [-20, 20]
+                    # },
+                    # "grid_size": [[-27.5, 27.5], [-27.5, 27.5]],
+                    # "grid_step": [5, 5],
+                    # "absolute": False
                     "type": "Kinematics",
-                    "absolute": True,
                     "vehicles_count": 10,
+                    "features": ["presence", "x", "y", "vx", "vy", "cos_h", "sin_h"],
                     "features_range": {
                         "x": [-100, 100],
                         "y": [-100, 100],
-                        "vx": [-15, 15],
-                        "vy": [-15, 15],
+                        "vx": [-20, 20],
+                        "vy": [-20, 20]
                     },
+                    "absolute": True,
+                    "order": "sorted",
                 },
                 # "action": {"type": "ContinuousAction"}, # not for DQN
                 # "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
-                "action": {"type": "DiscreteMetaAction"},
+                "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 4, 8, 12, 16]},
                 "incoming_vehicle_destination": None,
-                "collision_reward": -100000,
+                "collision_reward": -1.0,
                 "high_speed_reward": 0.2,
                 "right_lane_reward": 0,
                 # "lane_change_reward": -0.05,
                 "screen_width": 600,
                 "screen_height": 600,
                 "centering_position": [0.5, 0.6],
-                "duration": 11,
+                "duration": 20,
                 "normalize_reward": True,
             }
         )
@@ -356,7 +370,7 @@ class AA228Env(AbstractEnv):
             self.road,
             ("we", "sx", 0),
             longitudinal=5.0 + self.np_random.normal() * position_deviation,
-            speed=16 + self.np_random.normal() * speed_deviation,
+            speed=10 + self.np_random.normal() * speed_deviation,
         )
 
         if self.config["incoming_vehicle_destination"] is not None:
@@ -373,9 +387,9 @@ class AA228Env(AbstractEnv):
             vehicle = other_vehicles_type.make_on_lane(
                 self.road,
                 ("we", "sx", 0),
-                longitudinal=20.0 * float(i)
+                longitudinal= 40.0 * float(i)
                 + self.np_random.normal() * position_deviation,
-                speed=16.0 + self.np_random.normal() * speed_deviation,
+                speed=6.0 + self.np_random.normal() * speed_deviation,
             )
             vehicle.plan_route_to(self.np_random.choice(destinations))
             vehicle.randomize_behavior()
@@ -387,7 +401,7 @@ class AA228Env(AbstractEnv):
                 self.road,
                 ("eer", "ees", 0),
                 longitudinal= 20.0 * float(i) + self.np_random.normal() * position_deviation,
-                speed=16.0 + self.np_random.normal() * speed_deviation,
+                speed=5.0 + self.np_random.normal() * speed_deviation,
             )
             vehicle.plan_route_to(self.np_random.choice(destinations))
             vehicle.randomize_behavior()

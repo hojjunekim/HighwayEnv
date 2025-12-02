@@ -1,0 +1,1 @@
+{"rollout/ep_len_mean":5.6704545,"global_step":499,"train/learning_rate":0.0005,"_step":115,"rollout/exploration_rate":0.05,"_wandb":{"runtime":22},"_timestamp":1.7646430630791357e+09,"rollout/ep_rew_mean":-938.89435,"time/fps":21,"train/loss":187.5679,"_runtime":22}

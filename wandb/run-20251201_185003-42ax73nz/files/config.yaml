@@ -1,0 +1,249 @@
+_current_progress_remaining:
+    value: 1
+_custom_logger:
+    value: "False"
+_episode_num:
+    value: 0
+_last_episode_starts:
+    value: '[ True]'
+_last_obs:
+    value: |-
+        [[[ 1.00000000e+00  1.99999996e-02  4.49999988e-01  0.00000000e+00
+           -4.00000006e-01  6.12323426e-17 -1.00000000e+00]
+          [ 1.00000000e+00 -1.07827961e-01 -2.26647705e-01  3.92435551e-01
+            5.54315925e-01  9.30634558e-01  3.65949839e-01]
+          [ 1.00000000e+00  1.03271484e-01 -2.44077340e-01  2.58908331e-01
+            2.45009691e-01  8.58011067e-01 -5.13631165e-01]
+          [ 1.00000000e+00 -2.45148033e-01 -3.66883457e-01  8.24528635e-02
+            6.23350203e-01  3.46318960e-01  9.38116848e-01]
+          [ 1.00000000e+00  2.11080164e-01 -3.85177493e-01  8.95193070e-02
+            8.08803514e-02  2.70093799e-01 -9.62834001e-01]
+          [ 1.00000000e+00  1.00000000e+00 -4.69999999e-01 -4.05147552e-01
+            4.00000006e-01 -1.00000000e+00  1.22464685e-16]
+          [ 1.00000000e+00  1.00000000e+00 -4.69999999e-01 -3.19949001e-01
+            4.00000006e-01 -1.00000000e+00  1.22464685e-16]
+          [ 1.00000000e+00  1.00000000e+00 -4.69999999e-01 -8.12999234e-02
+            4.00000006e-01 -1.00000000e+00  1.22464685e-16]
+          [ 1.00000000e+00  1.00000000e+00 -4.69999999e-01 -2.81341106e-01
+            4.00000006e-01 -1.00000000e+00  1.22464685e-16]
+          [ 1.00000000e+00  8.68530571e-01 -4.69999999e-01 -2.93018728e-01
+            4.00000006e-01 -1.00000000e+00  1.22464685e-16]
+          [ 1.00000000e+00  1.93759724e-01 -5.59118211e-01 -1.10626437e-01
+            1.83285654e-01 -4.54659134e-01 -8.90665531e-01]
+          [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+            0.00000000e+00  0.00000000e+00  0.00000000e+00]
+          [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+            0.00000000e+00  0.00000000e+00  0.00000000e+00]
+          [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+            0.00000000e+00  0.00000000e+00  0.00000000e+00]
+          [ 0.00000000e+00  0.00000000e+00  0.00000000e+00  0.00000000e+00
+            0.00000000e+00  0.00000000e+00  0.00000000e+00]]]
+_last_original_obs:
+    value: None
+_logger:
+    value: <stable_baselines3.common.logger.Logger object at 0x7c7359953280>
+_n_calls:
+    value: 0
+_n_updates:
+    value: 0
+_num_timesteps_at_start:
+    value: 0
+_stats_window_size:
+    value: 100
+_total_timesteps:
+    value: 200
+_vec_normalize_env:
+    value: None
+_wandb:
+    value:
+        cli_version: 0.23.0
+        code_path: code/aa228/sb3_roundabout.py
+        e:
+            dhq4ud3rt2zkyv0rqh2xxxv3fmku6mdb:
+                codePath: aa228/sb3_roundabout.py
+                codePathLocal: aa228/sb3_roundabout.py
+                cpu_count: 12
+                cpu_count_logical: 24
+                cudaVersion: "12.2"
+                disk:
+                    /:
+                        total: "3936292454400"
+                        used: "3358084120576"
+                email: hojjunekim@snu.ac.kr
+                executable: /home/hojune/miniconda3/envs/aa228/bin/python
+                git:
+                    commit: 0617102188e98fa59a1e94ffadcfcc3345994fab
+                    remote: https://github.com/hojjunekim/HighwayEnv
+                gpu: NVIDIA GeForce RTX 3090
+                gpu_count: 1
+                gpu_nvidia:
+                    - architecture: Ampere
+                      cudaCores: 10496
+                      memoryTotal: "25769803776"
+                      name: NVIDIA GeForce RTX 3090
+                      uuid: GPU-c519c6a7-a8c3-77a0-e631-74bfa15c4d7d
+                host: dagobah
+                memory:
+                    total: "33549447168"
+                os: Linux-6.8.0-85-generic-x86_64-with-glibc2.35
+                program: /home/hojune/AA228/HighwayEnv/aa228/sb3_roundabout.py
+                python: CPython 3.10.19
+                root: /home/hojune/AA228/HighwayEnv
+                startedAt: "2025-12-02T02:50:03.430887Z"
+                writerId: dhq4ud3rt2zkyv0rqh2xxxv3fmku6mdb
+        m: []
+        python_version: 3.10.19
+        t:
+            "1":
+                - 1
+            "2":
+                - 1
+            "3":
+                - 2
+                - 3
+                - 22
+                - 35
+            "4": 3.10.19
+            "5": 0.23.0
+            "12": 0.23.0
+            "13": linux-x86_64
+action_noise:
+    value: None
+action_space:
+    value: Discrete(5)
+algo:
+    value: DQN
+batch_norm_stats:
+    value: '[]'
+batch_norm_stats_target:
+    value: '[]'
+batch_size:
+    value: 32
+buffer_size:
+    value: 15000
+device:
+    value: cuda
+env:
+    value: <stable_baselines3.common.vec_env.dummy_vec_env.DummyVecEnv object at 0x7c738f7ff1c0>
+ep_info_buffer:
+    value: deque([], maxlen=100)
+ep_success_buffer:
+    value: deque([], maxlen=100)
+exploration_final_eps:
+    value: 0.05
+exploration_fraction:
+    value: 0.1
+exploration_initial_eps:
+    value: 1
+exploration_rate:
+    value: 0
+exploration_schedule:
+    value: LinearSchedule(start=1.0, end=0.05, end_fraction=0.1)
+gamma:
+    value: 0.8
+gradient_steps:
+    value: 1
+learning_rate:
+    value: 0.0005
+learning_starts:
+    value: 200
+lr_schedule:
+    value: FloatSchedule(ConstantSchedule(val=0.0005))
+max_grad_norm:
+    value: 10
+n_envs:
+    value: 1
+n_steps:
+    value: 1
+num_timesteps:
+    value: 0
+observation_space:
+    value: Box(-inf, inf, (15, 7), float32)
+optimize_memory_usage:
+    value: "False"
+policy:
+    value: |-
+        DQNPolicy(
+          (q_net): QNetwork(
+            (features_extractor): FlattenExtractor(
+              (flatten): Flatten(start_dim=1, end_dim=-1)
+            )
+            (q_net): Sequential(
+              (0): Linear(in_features=105, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=5, bias=True)
+            )
+          )
+          (q_net_target): QNetwork(
+            (features_extractor): FlattenExtractor(
+              (flatten): Flatten(start_dim=1, end_dim=-1)
+            )
+            (q_net): Sequential(
+              (0): Linear(in_features=105, out_features=256, bias=True)
+              (1): ReLU()
+              (2): Linear(in_features=256, out_features=256, bias=True)
+              (3): ReLU()
+              (4): Linear(in_features=256, out_features=5, bias=True)
+            )
+          )
+        )
+policy_class:
+    value: <class 'stable_baselines3.dqn.policies.DQNPolicy'>
+policy_kwargs:
+    value: '{''net_arch'': [256, 256]}'
+q_net:
+    value: |-
+        QNetwork(
+          (features_extractor): FlattenExtractor(
+            (flatten): Flatten(start_dim=1, end_dim=-1)
+          )
+          (q_net): Sequential(
+            (0): Linear(in_features=105, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=5, bias=True)
+          )
+        )
+q_net_target:
+    value: |-
+        QNetwork(
+          (features_extractor): FlattenExtractor(
+            (flatten): Flatten(start_dim=1, end_dim=-1)
+          )
+          (q_net): Sequential(
+            (0): Linear(in_features=105, out_features=256, bias=True)
+            (1): ReLU()
+            (2): Linear(in_features=256, out_features=256, bias=True)
+            (3): ReLU()
+            (4): Linear(in_features=256, out_features=5, bias=True)
+          )
+        )
+replay_buffer:
+    value: <stable_baselines3.common.buffers.ReplayBuffer object at 0x7c738f7ff340>
+replay_buffer_class:
+    value: <class 'stable_baselines3.common.buffers.ReplayBuffer'>
+replay_buffer_kwargs:
+    value: '{}'
+sde_sample_freq:
+    value: -1
+seed:
+    value: None
+start_time:
+    value: 1764643804208169652
+target_update_interval:
+    value: 50
+tau:
+    value: 1
+tensorboard_log:
+    value: roundabout_dqn/
+train_freq:
+    value: 'TrainFreq(frequency=1, unit=<TrainFrequencyUnit.STEP: ''step''>)'
+use_sde:
+    value: "False"
+use_sde_at_warmup:
+    value: "False"
+verbose:
+    value: 1
