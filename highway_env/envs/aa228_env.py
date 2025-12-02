@@ -44,7 +44,7 @@ class AA228Env(AbstractEnv):
                 # "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 8, 16]},
                 "action": {"type": "DiscreteMetaAction", "target_speeds": [0, 4, 8, 12, 16]},
                 "incoming_vehicle_destination": None,
-                "collision_reward": -1.0,
+                "collision_reward": -10.0,
                 "high_speed_reward": 0.2,
                 "right_lane_reward": 0,
                 # "lane_change_reward": -0.05,
@@ -52,7 +52,7 @@ class AA228Env(AbstractEnv):
                 "screen_height": 600,
                 "centering_position": [0.5, 0.6],
                 "duration": 20,
-                "normalize_reward": True,
+                "normalize_reward": False,
             }
         )
         return config
@@ -344,7 +344,7 @@ class AA228Env(AbstractEnv):
 
         :return: the ego-vehicle
         """
-        position_deviation = 2.0
+        position_deviation = 20.0
         speed_deviation = 2.0
 
         # Ego-vehicle
@@ -363,13 +363,13 @@ class AA228Env(AbstractEnv):
         self.vehicle = ego_vehicle
 
         # Incoming vehicle
-        destinations = ["exr", "sxr", "nxr"]
+        destinations = ["exr", "nxr"] #, "sxr"]
         other_vehicles_type = utils.class_from_path(self.config["other_vehicles_type"])
         
         vehicle = other_vehicles_type.make_on_lane(
             self.road,
             ("we", "sx", 0),
-            longitudinal=5.0 + self.np_random.normal() * position_deviation,
+            longitudinal=20.0 + self.np_random.normal() * position_deviation,
             speed=10 + self.np_random.normal() * speed_deviation,
         )
 
@@ -383,11 +383,11 @@ class AA228Env(AbstractEnv):
 
         # Other vehicles in roundabout
         # for i in list(range(1, 2)) + list(range(-1, 0)):
-        for i in list(range(10)):
+        for i in list(range(1)):
             vehicle = other_vehicles_type.make_on_lane(
                 self.road,
                 ("we", "sx", 0),
-                longitudinal= 40.0 * float(i)
+                longitudinal= 40.0 + 20.0 * float(i)
                 + self.np_random.normal() * position_deviation,
                 speed=6.0 + self.np_random.normal() * speed_deviation,
             )

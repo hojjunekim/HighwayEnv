@@ -43,19 +43,21 @@ if __name__ == "__main__":
             tensorboard_log="roundabout_dqn/",
         )
     elif model_str == "ppo":
-        n_cpu = 6
-        batch_size = 32
+        n_cpu = 16
+        batch_size = 256
+        n_steps = 256
         model = PPO(
             "MlpPolicy",
             env,
-            policy_kwargs=dict(net_arch=[dict(pi=[256, 256], vf=[256, 256])]),
-            n_steps=batch_size * 12 // n_cpu,
+            policy_kwargs=dict(net_arch=dict(pi=[256, 256], vf=[256, 256])),
+            n_steps=n_steps,
             batch_size=batch_size,
             n_epochs=10,
             learning_rate=5e-4,
             gamma=0.9,
             verbose=2,
-            tensorboard_log="roundabout_" + model_str + "/",
+            tensorboard_log="roundabout_ppo/",
+            device="cuda"
         )
 
     # Train the model
