@@ -1,1 +1,0 @@
-{"rollout/ep_len_mean":5.375,"_timestamp":1.7646435937440398e+09,"global_step":172,"_runtime":10,"time/fps":21,"_wandb":{"runtime":10},"rollout/ep_rew_mean":-937.29767,"rollout/exploration_rate":0.05,"_step":31}

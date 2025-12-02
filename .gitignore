@@ -147,3 +147,7 @@ jupyter_execute
 .idea
 
 racetrack_oval_ppo/
+
+wandb/
+roundabout_dqn/
+roundabout_ppo/
